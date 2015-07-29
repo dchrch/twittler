@@ -18,9 +18,11 @@
             var $tweet = $('<div class="tweet"></div>');
             var $user = $('<a class="user" href="#"></a>');
             var $message = $('<span class="message"></span>');
+            var $date = $('<span class="date"></span>');
             $user.text('@' + tweet.user);
-            $message.text(' - ' + tweet.message);
-            $tweet.append($user, $message);
+            $message.text(' - ' + tweet.message + ' ');
+            $date.text(new Date);
+            $tweet.append($user, $message, $date);
             $tweetbox.prepend($tweet);
             index++; 
           }
