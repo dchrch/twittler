@@ -31,6 +31,29 @@
         var selectedUser;
         var index = 0;
         
+        var userDetails = {
+          hrstudent: {
+            name: 'Me',
+            picture: 'assets/logo.png'
+          },
+          sharksforcheap: {
+            name: 'Anthony Phillips',
+            picture: 'assets/anthony.jpg'
+          },
+          shawndrost: {
+            name: 'Shawn Drost',
+            picture: 'assets/shawn.jpg'
+          },
+          mracus: {
+            name: 'Marcus Phillips',
+            picture: 'assets/marcus.jpg'
+          },
+          douglascalhoun: {
+            name: 'Douglas Calhoun',
+            picture: 'assets/douglas.jpg'
+          }
+        };
+        
         $('.tweet-textfield').click(function() {
           $formElements.toggle();
           $('.tweet-textarea').focus();
@@ -74,19 +97,26 @@
         
         var update = function() {
           var updateDate = function() {
-            $(this).find('.date').text(streams.home[$(this).attr('id')].date.from(moment()));
+            $(this).find('.date').text(" - " + streams.home[$(this).attr('id')].date.from(moment()));
           };
           
           while (index < streams.home.length) {
             var tweet = streams.home[index];
             tweet.date = moment();
             var $tweet = $('<div class="tweet" id=' + index + '></div>');
+            var $picture = $('<img class="picture" alt="Profile picture">');
+            var $content = $('<div class="content"></div>');
+            var $name = $('<a class="name" href="#"></a>');
             var $user = $('<a class="user" href="#"></a>');
             var $message = $('<span class="message"></span>');
-            var $date = $('<span class="date"></span>');  
+            var $date = $('<span class="date"></span>');
+            $picture.attr("src", userDetails[tweet.user].picture);
+            $name.text(userDetails[tweet.user].name + " ");
             $user.text('@' + tweet.user);
             $message.text(tweet.message);
-            $tweet.append($user, $message, $date);
+            $tweet.append($picture);
+            $content.append($name, $user, $date, $message);
+            $tweet.append($content);
             $tweetbox.prepend($tweet);
             $('.tweet').each(updateDate);
             if (selectedUser && $user.text() !== selectedUser) {
@@ -97,7 +127,7 @@
           
           var toProfile = function() {
             $('.tweet').hide();
-            $('.user:contains("' + selectedUser + '")').parent().show();
+            $('.user:contains("' + selectedUser + '")').parent().parent().show();
             $formElements.hide();
             $('.tweet-form').css
             $('.btn-return').show();
@@ -105,6 +135,16 @@
 
           $('.user').click(function() {
             selectedUser = $(this).text();
+            toProfile();
+          });
+          
+          $('.name').click(function() {
+            selectedUser = $(this).next().text();
+            toProfile();
+          });
+          
+          $('.picture').click(function() {
+            selectedUser = $(this).next().children('.user').text();
             toProfile();
           });
           

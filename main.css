@@ -74,7 +74,7 @@ body {
 
 .container {
   margin: 0 auto;
-  width: 400px;
+  width: 590px;
 }
 
 .center-align {
@@ -107,7 +107,6 @@ a {
   display: inline-block;
   font-size: 14px;
   font-weight: bold;
-
   padding: 8px 14px;
   text-decoration: none;
 }
@@ -117,8 +116,8 @@ a {
 }
 
 .btn-disabled {
-  background: #b7dbe9 !important;
-  color: #f4f4f4 !important;
+  background: #b7dbe9;
+  color: #f4f4f4;
   cursor: default;
   pointer-events: none; 
 }
@@ -144,17 +143,38 @@ a {
   padding-left: 5px;
 }
 
-.user {
-  color: #0091c6;
+.picture {
+  border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 10px;
+  height: 50px;
+  width: 50px;
+}
+
+.content {
+  display: inline-block;
+  margin-top: 10px;
+  vertical-align: top;
+  width: 460px;
+}
+
+.name {
+  color: #000;
   font-weight: bold;
 }
 
-.user:hover {
+.name:hover {
+  color: #55ACEE;
   text-decoration: underline;
 }
 
+.user,
 .date {
   color: #adadad;
+  font-size: 16px;
 }
 
 .message {
