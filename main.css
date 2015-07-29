@@ -77,6 +77,10 @@ body {
   width: 400px;
 }
 
+.center-align {
+  text-align: center;
+}
+
 /*
   ========================================
   Links
@@ -101,14 +105,22 @@ a {
   color: #fff;
   cursor: pointer;
   display: inline-block;
+  font-size: 14px;
   font-weight: bold;
-  margin: 10px auto;
-  padding: 10px;
+
+  padding: 8px 14px;
   text-decoration: none;
 }
 
 .btn:hover {
   background: #0077A2;
+}
+
+.btn-disabled {
+  background: #b7dbe9 !important;
+  color: #f4f4f4 !important;
+  cursor: default;
+  pointer-events: none; 
 }
 
 /*
@@ -120,11 +132,11 @@ a {
 .tweetbox {
   background: #fff;
   border: solid #e5e5e5;
-  border-width: 1px 1px 1px 1px;
-  border-radius: 5px 5px 5px 5px;
-  -moz-border-radius: 5px 5px 5px 5px;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  margin-top: 10px;
+  border-width: 0 1px 1px 1px;
+  border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;
+
 }
 
 .tweet {
@@ -147,4 +159,44 @@ a {
 
 .message {
   display: block;
+}
+
+/*
+  ========================================
+  Tweet form
+  ========================================
+*/
+
+.tweet-form {
+  background: #E5F2F7;
+  border: 1px solid #aee0f2;
+  border-radius: 5px 5px 0px 0px;
+  -moz-border-radius: 5px 5px 0px 0px;
+  -webkit-border-radius: 5px 5px 0px 0px;
+  margin-top: 20px;
+  padding: 10px 10px 10px 30px;
+  text-align: right;
+}
+
+input,
+textarea {
+  border: 1px solid #aee0f2;
+  border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  line-height: 1.5em;
+  outline: inherit;
+  padding: 10px;
+  resize: none;
+  width: 100%;
+}
+
+textarea {
+  margin-bottom: 4px;
+}
+
+.char-count {
+  color: #a5a5a5;
+  font-size: 14px;
+  padding: 10px;
 }

@@ -9,21 +9,74 @@
   </head>
   <body>
     <div class="container">
-      <a class="btn" id="return">Back to Home</a>
+      <form class="tweet-form">
+        <input class="tweet-textfield" type="text" placeholder="What's happening?" required="">
+        <textarea class="tweet-textarea hidden" rows=4></textarea>
+        <span class="char-count hidden">140</span>
+        <a class="btn btn-submit btn-disabled hidden">Tweet</a>
+        <div class="center-align">
+          <a class="btn btn-return hidden">Back to Home</a>
+        </div>
+      </form>
       <section class="tweetbox"></section>  
     </div>
     <script>
       $(document).ready(function() {
+        window.visitor = 'hrstudent';
+        streams.users.hrstudent = [];
         var $tweetbox = $('.tweetbox');
+        var $formElements = $('.tweet-form').children().not('.btn-return, .center-align');
         $tweetbox.html('');
-        $('#return').hide();
+        $('.hidden').hide();
         var selectedUser;
         var index = 0;
+        
+        $('.tweet-textfield').click(function() {
+          $formElements.toggle();
+          $('.tweet-textarea').focus();
+        });
+        
+        $('.tweet-textarea').focusout(function() {
+          if ($(this).val().length === 0) {
+            $formElements.toggle();
+          }
+        });
+        
+        $('.tweet-textarea').on('input', function() {
+          var len = $(this).val().length;
+          var btn = $('.tweet-form').find('.btn');
+          var count = $('.char-count');
+          count.text(140 - len);
+          if (!btn.hasClass('btn-disabled')) {
+            if (len > 140 || len === 0) {
+              btn.addClass('btn-disabled');
+            }
+          }
+          else if (len <= 140 && len !== 0) {
+            btn.removeClass('btn-disabled');
+          }
+          if (len < 120) {
+            count.css('color', '#a5a5a5');
+          }
+          else if (len < 130) {
+            count.css('color', '#840000');
+          }
+          else {
+            count.css('color', 'red');
+          }
+        });
+        
+        $('.btn-submit').click(function(){
+          var message = $('.tweet-textarea').val();
+          writeTweet(message);
+          update();
+        });
         
         var update = function() {
           var updateDate = function() {
             $(this).find('.date').text(streams.home[$(this).attr('id')].date.from(moment()));
           };
+          
           while (index < streams.home.length) {
             var tweet = streams.home[index];
             tweet.date = moment();
@@ -45,7 +98,9 @@
           var toProfile = function() {
             $('.tweet').hide();
             $('.user:contains("' + selectedUser + '")').parent().show();
-            $('#return').show();
+            $formElements.hide();
+            $('.tweet-form').css
+            $('.btn-return').show();
           }
 
           $('.user').click(function() {
@@ -53,8 +108,9 @@
             toProfile();
           });
           
-          $('#return').on('click', function(event) {
+          $('.btn-return').on('click', function(event) {
             $('.tweet').show();
+            $formElements.not('.hidden').show();
             $(this).hide();
             selectedUser = null;
           });
