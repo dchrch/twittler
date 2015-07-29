@@ -89,6 +89,30 @@ a {
 
 /*
   ========================================
+  Buttons
+  ========================================
+*/
+
+.btn {
+  background: #0091c6;
+  border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  margin: 10px auto;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #0077A2;
+}
+
+/*
+  ========================================
   Tweets
   ========================================
 */
@@ -109,6 +133,7 @@ a {
 }
 
 .user {
+  color: #0091c6;
   font-weight: bold;
 }
 

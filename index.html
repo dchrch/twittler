@@ -8,15 +8,18 @@
   </head>
   <body>
     <div class="container">
+      <a class="btn" id="return">Back to Home</a>
       <section class="tweetbox"></section>  
     </div>
     <script>
-      $(document).ready(function(){
+      $(document).ready(function() {
         var $tweetbox = $('.tweetbox');
-        $tweetbox.html('');    
+        $tweetbox.html('');
+        $('#return').hide();
+        var selectedUser;
         var index = 0;
         var update = function() {
-          while(index < streams.home.length){
+          while (index < streams.home.length) {
             var tweet = streams.home[index];
             var $tweet = $('<div class="tweet"></div>');
             var $user = $('<a class="user" href="#"></a>');
@@ -27,10 +30,32 @@
             $date.text(new Date);
             $tweet.append($user, $message, $date);
             $tweetbox.prepend($tweet);
+            if (selectedUser && $user.text() !== selectedUser) {
+              $('.tweet').first().hide();
+            }
             index++; 
           }
+          
+          var toProfile = function() {
+            $('.tweet').hide();
+            $('.user:contains("' + selectedUser + '")').parent().show();
+            $('#return').show();
+          }
+
+          $('.user').click(function() {
+            selectedUser = $(this).text();
+            toProfile();
+          });
+          
+          $('#return').on('click', function(event) {
+            $('.tweet').show();
+            $(this).hide();
+            selectedUser = null;
+          });
         }
+        
         var tweetStream = setInterval(update, 500);
+
       });
     </script>
   </body>
