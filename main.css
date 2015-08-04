@@ -179,6 +179,7 @@ a {
 
 .message {
   display: block;
+  word-wrap: break-word;
 }
 
 /*
